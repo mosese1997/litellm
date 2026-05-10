@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: litellm_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: litellm
+      POSTGRES_PASSWORD: <DB_PASSWORD>
+      POSTGRES_DB: litellm
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - litellm_network
+
+  redis:
+    image: redis:7-alpine
+    container_name: litellm_redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes --requirepass <DB_PASSWORD>
+    volumes:
+      - ./data/redis:/data
+    ports:
+      - "6379:6379"
+    networks:
+      - litellm_network
+
+  litellm:
+    image: ghcr.io/berriai/litellm:main-latest
+    container_name: litellm_proxy
+    restart: unless-stopped
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      - DATABASE_URL=postgresql://litellm:<DB_PASSWORD>@postgres:5432/litellm
+      - REDIS_URL=redis://:<DB_PASSWORD>@redis:6379
+      - LITELLM_MASTER_KEY=${LITELLM_MASTER_KEY:-<LITELLM_MASTER_KEY>}
+      - MAAS_API_KEY=${MAAS_API_KEY}
+      - COMPLETION_MODEL=DeepSeek-V3.2
+      - PORT=4000
+      - ADMIN_PORT=4001
+    volumes:
+      - ./config:/app/config
+      - ./logs:/app/logs
+    ports:
+      - "4000:4000"
+      - "4001:4001"
+    networks:
+      - litellm_network
+    command: ["--config", "/app/config/config.yaml"]
+
+networks:
+  litellm_network:
+    driver: bridge

@@ -1,0 +1,115 @@
+model_list:
+  - model_name: deepseek-v4-flash
+    litellm_params:
+      model: deepseek-v4-flash
+      api_base: https://api-ap-southeast-1.modelarts-maas.com/openai/v1
+      api_key: <MAAS_API_KEY>
+      custom_llm_provider: openai
+
+  - model_name: deepseek-v3.1-terminus
+    litellm_params:
+      model: deepseek-v3.1-terminus
+      api_base: https://api-ap-southeast-1.modelarts-maas.com/openai/v1
+      api_key: <MAAS_API_KEY>
+      custom_llm_provider: openai
+
+  - model_name: DeepSeek-V3
+    litellm_params:
+      model: DeepSeek-V3
+      api_base: https://api-ap-southeast-1.modelarts-maas.com/openai/v1
+      api_key: <MAAS_API_KEY>
+      custom_llm_provider: openai
+
+  - model_name: deepseek-v3.2
+    litellm_params:
+      model: deepseek-v3.2
+      api_base: https://api-ap-southeast-1.modelarts-maas.com/openai/v1
+      api_key: <MAAS_API_KEY>
+      custom_llm_provider: openai
+
+  - model_name: deepseek-r1-250528
+    litellm_params:
+      model: deepseek-r1-250528
+      api_base: https://api-ap-southeast-1.modelarts-maas.com/openai/v1
+      api_key: <MAAS_API_KEY>
+      custom_llm_provider: openai
+
+  - model_name: glm-5
+    litellm_params:
+      model: glm-5
+      api_base: https://api-ap-southeast-1.modelarts-maas.com/openai/v1
+      api_key: <MAAS_API_KEY>
+      custom_llm_provider: openai
+
+  - model_name: glm-5.1
+    litellm_params:
+      model: glm-5.1
+      api_base: https://api-ap-southeast-1.modelarts-maas.com/openai/v1
+      api_key: <MAAS_API_KEY>
+      custom_llm_provider: openai
+
+  - model_name: deepseek-v4-flash-anthropic
+    litellm_params:
+      model: deepseek-v4-flash
+      api_base: https://api-ap-southeast-1.modelarts-maas.com/anthropic
+      api_key: <MAAS_API_KEY>
+      custom_llm_provider: anthropic
+
+  - model_name: deepseek-v3.1-terminus-anthropic
+    litellm_params:
+      model: deepseek-v3.1-terminus
+      api_base: https://api-ap-southeast-1.modelarts-maas.com/anthropic
+      api_key: <MAAS_API_KEY>
+      custom_llm_provider: anthropic
+
+  - model_name: DeepSeek-V3-anthropic
+    litellm_params:
+      model: DeepSeek-V3
+      api_base: https://api-ap-southeast-1.modelarts-maas.com/anthropic
+      api_key: <MAAS_API_KEY>
+      custom_llm_provider: anthropic
+
+  - model_name: deepseek-v3.2-anthropic
+    litellm_params:
+      model: deepseek-v3.2
+      api_base: https://api-ap-southeast-1.modelarts-maas.com/anthropic
+      api_key: <MAAS_API_KEY>
+      custom_llm_provider: anthropic
+
+  - model_name: deepseek-r1-250528-anthropic
+    litellm_params:
+      model: deepseek-r1-250528
+      api_base: https://api-ap-southeast-1.modelarts-maas.com/anthropic
+      api_key: <MAAS_API_KEY>
+      custom_llm_provider: anthropic
+
+  - model_name: glm-5-anthropic
+    litellm_params:
+      model: glm-5
+      api_base: https://api-ap-southeast-1.modelarts-maas.com/anthropic
+      api_key: <MAAS_API_KEY>
+      custom_llm_provider: anthropic
+
+  - model_name: glm-5.1-anthropic
+    litellm_params:
+      model: glm-5.1
+      api_base: https://api-ap-southeast-1.modelarts-maas.com/anthropic
+      api_key: <MAAS_API_KEY>
+      custom_llm_provider: anthropic
+
+litellm_settings:
+  drop_params: true
+  set_verbose: true
+
+general_settings:
+  master_key: <LITELLM_MASTER_KEY>
+  otel: false
+  enable_pre_call_checks: true
+  completion_model: deepseek-v3.2
+  num_retries: 3
+  request_timeout: 600
+  max_tokens: 8192
+  temperature: 0.7
+
+environment_variables:
+  MAAS_API_KEY: <MAAS_API_KEY>
